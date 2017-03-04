@@ -1,12 +1,14 @@
 .App {
   text-align: center;
-  display: flex;
-  flex-direction: column;
   height: 100%;
-  align-items: stretch;
+  overflow: hidden;
 }
 
-.country {
+.teams {
+  height: 200px;
+}
+
+.teams span {
   font-size: 80px;
   flex: 1;
   justify-content: center;
@@ -36,18 +38,15 @@
   flex: 1;
 }
 
-.teams {
-  max-height: 250px;
-}
-
 .score {
+  margin: 16px 0;
   align-items: flex-start;
 }
 
 .grows {
     animation-name: grow;
     animation-duration: 2s;
-    animation-timing-function: ease-in-out;
+    animation-timing-function: linear;
 }
 
 .restart {
@@ -57,24 +56,24 @@
 }
 
 @keyframes grow {
-    0% { font-size: 200 }
-    100% { font-size: 800px }
+    0% { font-size: 200px }
+    50% { font-size: 600px}
+    100% { font-size: 200px }
 }
 
 .status {
-  margin: auto;
+  margin: 32px auto;
   width: 200px;
   padding-left: 40px;
   line-height: 30px;
-  margin-bottom: 150px;
 }
 
 .on {
-  background: url(../on.svg) no-repeat;
+  background: url(assets/on.svg) no-repeat;
   background-size: 30px 30px;
 }
 
 .off {
-  background: url(../off.svg) no-repeat;
+  background: url(assets/off.svg) no-repeat;
   background-size: 30px 30px;
 }

@@ -6,7 +6,11 @@ html, #root {
 }
 
 body {
-  background: url(../background.jpg) no-repeat center center fixed;
+  background-color: #041D2D;
+  background-image: url(assets/background.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
   background-size: cover;
   color: white;
   font-family: 'Exo 2', sans-serif;
