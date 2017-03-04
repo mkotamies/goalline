@@ -16,7 +16,8 @@ class App extends Component {
       status: false,
       team1: localStorage.getItem('goalline.team1.name') || 'Suomi',
       team2: localStorage.getItem('goalline.team2.name') || 'Ruotsi',
-      time: 0
+      time: 0,
+      timer: null
     }
   }
 
@@ -48,13 +49,15 @@ class App extends Component {
   restartGame() {
     return Api.restartGame()
       .then(this.updateScores.bind(this))
-      .then(this.stateGame.bind(this))
+      .then(this.startGame.bind(this))
   }
 
   startGame() {
+    if(this.state.timer) this.state.timer.stop()
     const timer = new Stopwatch()
     timer.onTime(time => this.setState({time: time.ms}))
     timer.start()
+    this.setState({timer})
   }
 
   updateScores(data, shouldAnimateChange = true) {
@@ -97,13 +100,11 @@ class App extends Component {
 
     return (
       <div className="App">
-
-        <h2>Pöytäfutiksen tilanne</h2>
-        <span className="timer">{this.renderTime()}</span>
         <div className="container teams">
           <input type="text" value={this.state.team1} onChange={e => this.updateTeamName('team1', e.target.value)} />
           <input type="text" value={this.state.team2} onChange={e => this.updateTeamName('team2', e.target.value)} />
         </div>
+        <span className="timer">{this.renderTime()}</span>
         <div className="container score">
           <div className={team1Classes}>{team1Goals}</div>
           <div className="teambox">-</div>
@@ -118,8 +119,8 @@ class App extends Component {
 
   renderTime() {
     const time = this.state.time
-    let minutes = parseInt(time / (60 * 1000))
-    let seconds = parseInt((time % (60 * 1000)) / 1000)
+    let minutes = parseInt(time / (60 * 1000), 10)
+    let seconds = parseInt((time % (60 * 1000)) / 1000, 10)
 
     if(minutes < 10) minutes = "0" + minutes
     if(seconds < 10) seconds =  "0" + seconds
