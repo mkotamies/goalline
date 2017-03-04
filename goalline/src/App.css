@@ -8,7 +8,18 @@
   height: 200px;
 }
 
-.teams span {
+.timer {
+  color: #DEDC47;
+}
+
+.teams input {
+  font-family: 'Exo 2', sans-serif;
+  background: none;
+  border:none;
+  outline: none;
+  text-align: center;
+  width: 300px;
+  color: white;
   font-size: 80px;
   flex: 1;
   justify-content: center;

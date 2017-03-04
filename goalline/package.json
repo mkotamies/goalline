@@ -5,7 +5,9 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-sound": "0.5.2",
+    "timer-stopwatch": "0.2.0"
   },
   "devDependencies": {
     "react-scripts": "0.9.3"
