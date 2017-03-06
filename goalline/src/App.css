@@ -89,3 +89,20 @@
   background: url(assets/off.svg) no-repeat;
   background-size: 30px 30px;
 }
+
+@media screen and (max-height: 700px) {
+  .teambox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+    font-size: 80px;
+  }
+
+  .teams input{
+      width: 100px;
+      font-size: 40px;
+  }
+  
+}
