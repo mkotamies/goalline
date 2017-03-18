@@ -1,0 +1,28 @@
+{
+  "name": "soccer",
+  "version": "0.0.1",
+  "description": "A Serverless Project and its Serverless Plugin dependencies.",
+  "author": "me",
+  "license": "MIT",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "dynamodb": "^0.3.6",
+    "dynamodb-doc": "^1.0.0",
+    "moment": "^2.13.0",
+    "querystring": "^0.2.0",
+    "ramda": "^0.22.1",
+    "serverless-cors-plugin": "^0.4.2",
+    "serverless-helpers-js": "^0.2.0"
+  },
+  "devDependencies": {
+    "babel-loader": "^6.2.5",
+    "serverless-webpack": "^1.0.0-rc.1",
+    "webpack": "^1.13.2",
+    "webpack-node-externals": "^1.4.3"
+  }
+}
