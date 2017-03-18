@@ -1,0 +1,82 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+plugins:
+  - serverless-webpack
+
+service: soccer
+
+custom:
+  webpackIncludeModules: true
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  iamRoleStatements:
+      -  Effect: "Allow"
+         Action:
+          - "dynamodb:PutItem"
+          - "dynamodb:Scan"
+          - "dynamodb:Query"
+          - "dynamodb:GetItem"
+          - "dynamodb:DeleteItem"
+         Resource:
+           - "arn:aws:dynamodb:eu-west-1:206509030333:table/*"
+
+functions:
+  listGoals:
+    handler: handler.listGoals
+    memorySize: 128
+    timeout: 10
+    events:
+      - http:
+          method: get
+          path: goal
+          cors: true
+          integration: lambda
+  addGoal:
+    handler: handler.addGoal
+    memorySize: 128
+    events:
+      - http:
+          method: post
+          path: goal
+          integration: lambda
+  removeGoal:
+    handler: handler.removeGoals
+    memorySize: 128
+    timeout: 20
+    events:
+      - http:
+          method: delete
+          path: goal
+          cors: true
+          integration: lambda
+  isGameOn:
+    handler: handler.isGameOn
+    memorySize: 128
+    timeout: 10
+    events:
+      - http:
+          method: get
+          path: gameOn
+          cors: true
+          integration: lambda
+  addPing:
+    handler: handler.addPing
+    memorySize: 128
+    events:
+      - http:
+          method: post
+          path: ping
+          integration: lambda
