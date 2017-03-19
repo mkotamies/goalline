@@ -17,7 +17,8 @@
     "querystring": "^0.2.0",
     "ramda": "^0.22.1",
     "serverless-cors-plugin": "^0.4.2",
-    "serverless-helpers-js": "^0.2.0"
+    "serverless-helpers-js": "^0.2.0",
+    "twitter": "1.7.0"
   },
   "devDependencies": {
     "babel-loader": "^6.2.5",

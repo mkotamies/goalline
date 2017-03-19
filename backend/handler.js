@@ -3,6 +3,14 @@ import querystring from 'querystring'
 import Promise from 'bluebird'
 import R from 'ramda'
 import {dynamo} from './common/dynamodb'
+import Twitter from 'twitter'
+
+const twitterClient = new Twitter({
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+})
 
 Promise.promisifyAll(dynamo)
 
@@ -77,4 +85,13 @@ export function addPing(req, context, cb) {
     .tap(saved => console.log('saved'))
     .then(() => {cb(null, {message: `Pinged`})})
     .catch(err => {cb(err)})
+}
+
+export function gameOver(req, context, cb) {
+  console.log(req.body)
+  const message = req.body ? req.body.message : null
+
+  if(message) {
+    twitterClient.post('statuses/update', {status: message},  function(error, tweet, response) {})
+  }
 }

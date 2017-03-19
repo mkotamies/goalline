@@ -64,7 +64,7 @@ class App extends Component {
     const team1Goal = shouldAnimateChange && this.goalsForTeam(data, "1") > this.goalsForTeam(this.state.data, "1")
     const team2Goal = shouldAnimateChange && this.goalsForTeam(data, "2") > this.goalsForTeam(this.state.data, "2")
 
-    this.setState({data, team1Goal, team2Goal})
+    this.setState({data, team1Goal, team2Goal}, this.ifGameJustEnded.bind(this))
   }
 
   goalsForTeam(data, team) {
@@ -76,6 +76,30 @@ class App extends Component {
     const state = {}
     state[team] = newName
     this.setState(state)
+  }
+
+  ifGameJustEnded() {
+
+    const team1 = {name: this.state.team1, goals: this.goalsForTeam(this.state.data, "1")}
+    const team2 = {name: this.state.team2, goals: this.goalsForTeam(this.state.data, "2")}
+
+    let winner = null
+    let looser = null
+
+    if(team1.goals === 10 && team2.goals < 10) {
+      winner = team1
+      looser = team2
+    }
+    else if(team2.goals === 10 && team1.goals < 10) {
+      winner = team2
+      looser = team1
+    }
+
+    if(winner && looser) {
+      const message = `${winner.name} beats ${looser.name} ${winner.goals} - ${looser.goals}! #wedogoalslive`
+      if(!this.state.gameEnded) Api.tweet(message)
+      this.setState({gameEnded: true})
+    }
   }
 
   render() {

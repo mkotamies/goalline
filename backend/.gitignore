@@ -42,3 +42,5 @@ admin.env
 
 #Ignore _meta folder
 _meta
+
+serverless.env.yml
