@@ -22,6 +22,11 @@ custom:
 provider:
   name: aws
   runtime: nodejs4.3
+  environment:
+      TWITTER_CONSUMER_KEY: ${file(./serverless.env.yml):dev.TWITTER_CONSUMER_KEY}
+      TWITTER_CONSUMER_SECRET: ${file(./serverless.env.yml):dev.TWITTER_CONSUMER_SECRET}
+      TWITTER_ACCESS_TOKEN_KEY: ${file(./serverless.env.yml):dev.TWITTER_ACCESS_TOKEN_KEY}
+      TWITTER_ACCESS_TOKEN_SECRET: ${file(./serverless.env.yml):dev.TWITTER_ACCESS_TOKEN_SECRET}
   iamRoleStatements:
       -  Effect: "Allow"
          Action:
@@ -71,6 +76,14 @@ functions:
           method: get
           path: gameOn
           cors: true
+          integration: lambda
+  gameOver:
+    handler: handler.gameOver
+    memorySize: 128
+    events:
+      - http:
+          method: post
+          path: gameOver
           integration: lambda
   addPing:
     handler: handler.addPing

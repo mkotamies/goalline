@@ -14,8 +14,16 @@ class Api {
     return this.fetchApi("/goal", "delete").then(this.getCurrentScore.bind(this))
   }
 
-  fetchApi(path, method = "get", isJson = true) {
-    return fetch(BASE_URL + path, {method})
+  tweet(message) {
+    console.log(message)
+    return this.fetchApi("/gameOver", "post", true, {message})
+  }
+
+  fetchApi(path, method = "get", isJson = true, request) {
+
+    const body = request ? JSON.stringify(request) : null
+
+    return fetch(BASE_URL + path, {method, body})
       .then(res => {
         if(res.status !== 200) throw new Error("Fetch failed")
         else return res
