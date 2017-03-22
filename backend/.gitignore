@@ -39,6 +39,7 @@ node_modules
 admin.env
 .env
 .serverless
+serverless.env*
 
 #Ignore _meta folder
 _meta
