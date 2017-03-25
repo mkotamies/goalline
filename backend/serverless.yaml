@@ -84,6 +84,7 @@ functions:
       - http:
           method: post
           path: gameOver
+          cors: true
           integration: lambda
   addPing:
     handler: handler.addPing
