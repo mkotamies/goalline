@@ -96,9 +96,9 @@ class App extends Component {
       looser = team1
     }
 
-    if (winner && looser) {
+    if(winner && looser) {
       const message = `${winner.name} beats ${looser.name} ${winner.goals} - ${looser.goals}! #wedogoalslive`
-      if (!this.state.gameEnded) Api.tweet(message)
+      if(!this.state.gameEnded) Api.tweet(message)
       this.setState({gameEnded: true})
     }
   }
