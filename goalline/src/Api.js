@@ -15,20 +15,28 @@ class Api {
   }
 
   tweet(message) {
-    console.log(message)
     return this.fetchApi("/gameOver", "post", true, {message})
   }
 
-  fetchApi(path, method = "get", isJson = true, request) {
+  fetchApi(path, method = "get", isResponseJson = true, request) {
 
     const body = request ? JSON.stringify(request) : null
 
-    return fetch(BASE_URL + path, {method, body})
-      .then(res => {
-        if(res.status !== 200) throw new Error("Fetch failed")
-        else return res
-      })
-      .then(res => isJson ? res.json() : res.text())
+    return fetch(BASE_URL + path, {method, body, headers: this._jsonHeaders()})
+      .then(this._handleResponse(isResponseJson))
+  }
+
+  _handleResponse(isResponseJson) {
+    return res => {
+      if (res.status !== 200) throw new Error("Fetch failed")
+      else return isResponseJson ? res.json() : res.text()
+    }
+  }
+
+  _jsonHeaders() {
+    return {
+      'Content-Type': 'application/json'
+    }
   }
 }
 
